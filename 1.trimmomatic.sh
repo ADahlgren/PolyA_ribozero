@@ -12,8 +12,8 @@ echo $base
 base2=${base/R1/R2}
 echo $base2
 
-#run trimmomatic
-trimmomatic PE ${base}.fastq.gz ${base2}.fastq.gz\  ${base}_trim.qc.fq ${base}_trim_s1_se ${base2}_trim.qc.fq ${base2}_trim_s2_se\ SLIDINGWINDOW:3:28
+#run trimmomatic - PE for paired end; 
+trimmomatic PE ${base}.fastq.gz ${base2}.fastq.gz ${base}_trim.qc.fq ${base}_trim_s1_se ${base2}_trim.qc.fq ${base2}_trim_s2_se SLIDINGWINDOW:3:28
 
 #fastqc
 fastqc ${base}_trim.qc.fq
