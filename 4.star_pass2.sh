@@ -16,7 +16,10 @@ echo $base2
 #map with star(pass2)
   #genomeDir - location of reference genome
   #sjdbFileChrStartEnd - tab files from pass1 (use junctions detected in 1st pass as ”annotated” junctions for 2nd pass)
-  #readFilesIn - reads
+  #readFilesIn - path to reads
+  #outFileNamePrefix - location and name of output
+  #outSAMstrandField intronMotif - for XS strand attribute needed for stringtie
+  #outSAMtype - type of output; sorted bam file (so don't have to samtools sort later)
 STAR --runThreadN 12 --genomeDir star_index \
 --sjdbFileChrStartEnd /share/finnolab/adahl/polyA_ribozero/mapping/pass1/683610_Liver_Ribozero_S51_R1_001_trim_SJ.out.tab /share/finnolab/adahl/polyA_ribozero/mapping/pass1/683610_Liver_S61_R1_001_trim_SJ.out.tab \
 --readFilesIn /share/finnolab/adahl/polyA_ribozero/mapping/${base}.qc.fq \
