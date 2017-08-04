@@ -1,3 +1,4 @@
+#note: this is only using merged gtf
 
 module load stringtie
 
