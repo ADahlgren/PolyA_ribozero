@@ -1,4 +1,4 @@
-#note: this is only using merged gtf
+#note: this is for refined GTF which I used in lnc analysis
 
 module load stringtie
 
@@ -6,15 +6,24 @@ module load stringtie
 ln -fs /share/finnolab/adahl/polyA_ribozero/mapping/pass2/*.out.bam
 ln -fs /share/finnolab/adahl/polyA_ribozero/mapping/star_index/*.GTF
 
-#create base
-for filename in *.out.bam
+for filename in *.bam
 do
-base=$(basename $filename _Aligned.sortedByCoord.out.bam)
+base=$(basename $filename .out.bam)
 echo $base
 
+#already make ballgown directory and then this is to make subdirectories separating ballgown files for each sample
+#may use these files later to look at differential expression?
+cd ballgowns
+mkdir ${base}_ballgown
+cd ../
+
 #stringtie
+#G - GTF file (used both merged and filtered, proceded with filtered to lnc analysis)
+#o - output gtf name
+#A - report gene abundances in abund.out file
+#b - path to where ballgown files should be outputed 
 echo "stringtie time"
-stringtie ${base}_Aligned.sortedByCoord.out.bam -G mergedTrans.GTF -o ${base}_merged_stringtie.gtf -A ${base}_merged_abund.out \
--b /share/finnolab/adahl/polyA_ribozero/ballgown/merged_gtf/${base}_ballgown
+stringtie ${base}.out.bam -G filtered4_refined_Alltissues.GTF -o ${base}_refined_stringtie.gtf -A ${base}_refined_abund.out \
+-b /share/finnolab/adahl/polyA_ribozero/ballgown/refined2/ballgowns/${base}_ballgown
 
 done
