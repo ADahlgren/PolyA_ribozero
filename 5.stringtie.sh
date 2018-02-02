@@ -1,6 +1,6 @@
 #note: this is for refined GTF which I used in lnc analysis
 
-module load stringtie
+module load stringtie/1.3.2d
 
 #link mapped bam files from star pass2 and gtf files from mapping file
 ln -fs /share/finnolab/adahl/polyA_ribozero/mapping/pass2/*.out.bam
