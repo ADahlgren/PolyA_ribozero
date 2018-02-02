@@ -1,7 +1,7 @@
 #load trimmomatic
-module load trimmomatic
+module load trimmomatic/0.33
 #load fastqc
-module load fastqc
+module load fastqc/v0.11.2
 
 for filename in *R1_001.fastq.gz
 do
