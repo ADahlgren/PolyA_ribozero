@@ -1,3 +1,5 @@
+##Ended up using sickle trimmed files since gave better mapping stats
+
 #load sickle
 module load sickle
 #load fastqc
