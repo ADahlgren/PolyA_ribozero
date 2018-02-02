@@ -1,9 +1,9 @@
 ##Ended up using sickle trimmed files since gave better mapping stats
 
 #load sickle
-module load sickle
+module load sickle/85e5117
 #load fastqc
-module load fastqc
+module load fastqc/v0.11.5
 
 for filename in *R1_001.fastq.gz
 do
