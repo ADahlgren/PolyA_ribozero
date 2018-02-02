@@ -1,6 +1,6 @@
 #COPY TAB FILES (from pass1) INTO THIS
 
-module load star
+module load star/2.5.2b
 
 mkdir pass2
 
