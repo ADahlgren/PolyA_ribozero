@@ -1,4 +1,4 @@
-module load star
+module load star/2.5.2b
 
 mkdir star_index
 
