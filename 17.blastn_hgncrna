@@ -1,0 +1,15 @@
+curl -O ftp://ftp.ensembl.org/pub/release-86/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz
+gunzip Homo_sapiens.GRCh38.ncrna.fa.gz
+
+module load blast/2.6.0+
+
+makeblastdb -in Homo_sapiens.GRCh38.ncrna.fa -input_type fasta -dbtype nucl -out hg38_ncrna_db
+
+for filename in A*.fa
+do
+base=$(basename $filename .fa)
+echo $base
+
+blastn -query ${base}.fa -db hg38_ncrna_db -max_target_seqs 1 -outfmt "6 qseqid sseqid pident qcovs evalue" -evalue 1e-5 -num_threads 8 > ${base}_human_lncrna.outfmt6
+
+done
