@@ -1,0 +1,10 @@
+module load bedtools2/2.27.0
+
+for filename in *nodupsP_1.bed
+do
+base=$(basename $filename _nodupsP_1.bed)
+echo $base
+
+bedtools getfasta -s -fi genome.fa -bed ${base}_nodupsP_1.bed -name -split -fo ${base}.fa
+
+done
