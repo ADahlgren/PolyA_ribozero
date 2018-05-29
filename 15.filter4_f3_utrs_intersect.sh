@@ -26,7 +26,7 @@ done
 # -a = file a, compared to file b
 # -b = designates file b
 # -sorted = requires position-sorted input, helps keep memory usage low
-# -s = force strandedness
+# -s = force strandedness, maybe I shouldn't do this as there are many lines that have a . instead of +/-
 
 module load bedtools2/2.27.0
 
