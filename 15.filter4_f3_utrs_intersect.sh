@@ -22,6 +22,12 @@ done
 ############################################################
 
 #use bedtools intersect to identify overlap between output of filter3 and UTRs
+# -c = report number of overlaps file a has with file b 
+# -a = file a, compared to file b
+# -b = designates file b
+# -sorted = requires position-sorted input, helps keep memory usage low
+# -s = force strandedness
+
 module load bedtools2/2.27.0
 
 for filename in *f3.bed
