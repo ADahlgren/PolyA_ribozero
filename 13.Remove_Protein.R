@@ -1,6 +1,4 @@
-#R script to remove protein coding sequences using blastp, hmmersearch, and blastn files
-
-setwd("~/research/polyA_ribozero/Filter3")
+setwd("~/research/polyA_ribozero/Filtering")
 
 require(tidyr)
 require(dplyr)
@@ -76,7 +74,6 @@ write.table(AH2_PC_Ribozero_blastp_bed, "AH2_PC_Ribozero_blastp.bed", row.names 
 write.table(AH2_PC_blastp_bed, "AH2_PC_blastp.bed", row.names = FALSE, 
             col.names = FALSE, quote = FALSE, sep = "\t")
 
-##################################################################################################################
 
 #upload hmmersearch files (end with pfam.tblout)
 AH1_Liver_Ribozero_pfam <- read.table("683610_Liver_Ribozero_pfam.tblout", header = FALSE, stringsAsFactors = FALSE)
@@ -141,8 +138,6 @@ write.table(AH2_PC_Ribozero_pfam_bed, "AH2_PC_Ribozero_pfam.bed",
 write.table(AH2_PC_pfam_bed, "AH2_PC_pfam.bed",
             row.names = FALSE, col.names = FALSE, quote = FALSE, sep = "\t")
 
-####################################################################################################
-
 #download cdna.outfmt6 files from blastn
 AH1_Liver_Ribozero_blastn <- read.table("683610_Liver_Ribozero_S51_f1_hg38_cdna.outfmt6", 
                                         header = FALSE, stringsAsFactors = FALSE, sep = "\t")
@@ -162,36 +157,36 @@ AH2_PC_blastn <- read.table("686521_Parietal_Cortex_S54_f1_hg38_cdna.outfmt6",
                              header = FALSE, stringsAsFactors = FALSE, sep = "\t")
 
 #select column V1 to get gene IDs
-AH1_Liver_Ribozero_blastn_temp = data.frame(str_split_fixed(AH1_Liver_Ribozero_blastn$V1, ":", 4))
-AH1_Liver_Ribozero_blastn_bed <- cbind(AH1_Liver_Ribozero_blastn_temp$X3, AH1_Liver_Ribozero_blastn[,c("V2", "V11")])
+AH1_Liver_Ribozero_blastn_temp = data.frame(AH1_Liver_Ribozero_blastn$V1)
+AH1_Liver_Ribozero_blastn_bed <- cbind(AH1_Liver_Ribozero_blastn_temp, AH1_Liver_Ribozero_blastn[,c("V2", "V11")])
 names(AH1_Liver_Ribozero_blastn_bed)=c("V4", "target", "sig")
 
-AH1_Liver_blastn_temp = data.frame(str_split_fixed(AH1_Liver_blastn$V1, ":", 4))
-AH1_Liver_blastn_bed <- cbind(AH1_Liver_blastn_temp$X3, AH1_Liver_blastn[,c("V2", "V11")])
+AH1_Liver_blastn_temp = data.frame(AH1_Liver_blastn$V1)
+AH1_Liver_blastn_bed <- cbind(AH1_Liver_blastn_temp, AH1_Liver_blastn[,c("V2", "V11")])
 names(AH1_Liver_blastn_bed)=c("V4", "target", "sig")
 
-AH1_PC_Ribozero_blastn_temp = data.frame(str_split_fixed(AH1_PC_Ribozero_blastn$V1, ":", 4))
-AH1_PC_Ribozero_blastn_bed <- cbind(AH1_PC_Ribozero_blastn_temp$X3, AH1_PC_Ribozero_blastn[,c("V2", "V11")])
+AH1_PC_Ribozero_blastn_temp = data.frame(AH1_PC_Ribozero_blastn$V1)
+AH1_PC_Ribozero_blastn_bed <- cbind(AH1_PC_Ribozero_blastn_temp, AH1_PC_Ribozero_blastn[,c("V2", "V11")])
 names(AH1_PC_Ribozero_blastn_bed)=c("V4", "target", "sig")
 
-AH1_PC_blastn_temp = data.frame(str_split_fixed(AH1_PC_blastn$V1, ":", 4))
-AH1_PC_blastn_bed <- cbind(AH1_PC_blastn_temp$X3, AH1_PC_blastn[,c("V2", "V11")])
+AH1_PC_blastn_temp = data.frame(AH1_PC_blastn$V1)
+AH1_PC_blastn_bed <- cbind(AH1_PC_blastn_temp, AH1_PC_blastn[,c("V2", "V11")])
 names(AH1_PC_blastn_bed)=c("V4", "target", "sig")
 
-AH2_Liver_Ribozero_blastn_temp = data.frame(str_split_fixed(AH2_Liver_Ribozero_blastn$V1, ":", 4))
-AH2_Liver_Ribozero_blastn_bed <- cbind(AH2_Liver_Ribozero_blastn_temp$X3, AH2_Liver_Ribozero_blastn[,c("V2", "V11")])
+AH2_Liver_Ribozero_blastn_temp = data.frame(AH2_Liver_Ribozero_blastn$V1)
+AH2_Liver_Ribozero_blastn_bed <- cbind(AH2_Liver_Ribozero_blastn_temp, AH2_Liver_Ribozero_blastn[,c("V2", "V11")])
 names(AH2_Liver_Ribozero_blastn_bed)=c("V4", "target", "sig")
 
-AH2_Liver_blastn_temp = data.frame(str_split_fixed(AH2_Liver_blastn$V1, ":", 4))
-AH2_Liver_blastn_bed <- cbind(AH2_Liver_blastn_temp$X3, AH2_Liver_blastn[,c("V2", "V11")])
+AH2_Liver_blastn_temp = data.frame(AH2_Liver_blastn$V1)
+AH2_Liver_blastn_bed <- cbind(AH2_Liver_blastn_temp, AH2_Liver_blastn[,c("V2", "V11")])
 names(AH2_Liver_blastn_bed)=c("V4", "target", "sig")
 
-AH2_PC_Ribozero_blastn_temp = data.frame(str_split_fixed(AH2_PC_Ribozero_blastn$V1, ":", 4))
-AH2_PC_Ribozero_blastn_bed <- cbind(AH2_PC_Ribozero_blastn_temp$X3, AH2_PC_Ribozero_blastn[,c("V2", "V11")])
+AH2_PC_Ribozero_blastn_temp = data.frame(AH2_PC_Ribozero_blastn$V1)
+AH2_PC_Ribozero_blastn_bed <- cbind(AH2_PC_Ribozero_blastn_temp, AH2_PC_Ribozero_blastn[,c("V2", "V11")])
 names(AH2_PC_Ribozero_blastn_bed)=c("V4", "target", "sig")
 
-AH2_PC_blastn_temp = data.frame(str_split_fixed(AH2_PC_blastn$V1, ":", 4))
-AH2_PC_blastn_bed <- cbind(AH2_PC_blastn_temp$X3, AH2_PC_blastn[,c("V2", "V11")])
+AH2_PC_blastn_temp = data.frame(AH2_PC_blastn$V1)
+AH2_PC_blastn_bed <- cbind(AH2_PC_blastn_temp, AH2_PC_blastn[,c("V2", "V11")])
 names(AH2_PC_blastn_bed)=c("V4", "target", "sig")
 
 #output in bed format
@@ -212,9 +207,7 @@ write.table(AH2_PC_Ribozero_blastn_bed, "AH2_PC_Ribozero_blastn.bed", row.names 
 write.table(AH2_PC_blastn_bed, "AH2_PC_blastn.bed", row.names = FALSE,
             col.names = FALSE, quote = FALSE, sep = "\t" )
 
-##########################################################################################################
-
-#use filter12.bed files next
+#use filter12.bed files next. already downloaded
 
 AH1_Liver_Ribozero_bed_f12 = read.table("683610_Liver_Ribozero_S51_filter12.bed", header = F, 
                                     colClasses = "character", sep = "\t")
@@ -232,10 +225,8 @@ AH2_PC_Ribozero_bed_f12 = read.table("686521_Parietal_Cortex_Ribozero_S52_filter
                                      colClasses = "character", sep = "\t")
 AH2_PC_bed_f12 = read.table("686521_Parietal_Cortex_S54_filter12.bed", header = F, 
                             colClasses = "character", sep = "\t")
-                            
-##############################################################################################################                            
 
-#There is a combine step in Erica's script. However, this is a little different, so I am skipping this step
+#There is a combine step in Erica's script. However, this is a little different, I am skipping this step
 
 #merge protein findings (blastp + hmmer pfam + blastn)
 AH1_Liver_Ribozero_protein <- rbind(AH1_Liver_Ribozero_blastp_bed, AH1_Liver_Ribozero_pfam_bed, 
@@ -291,73 +282,158 @@ write.table(AH2_PC_Ribozero_nodups_bed, "AH2_PC_Ribozero_nodups.bed", row.names 
 write.table(AH2_PC_nodups_bed, "AH2_PC_nodups.bed", row.names = FALSE,
             col.names = FALSE, quote = FALSE, sep = "\t")
 
-#all this P_all_nodups steps are necessary for later step
-P_all_nodups_id <- rbind(data.frame(id="AH1_Liver_Ribozero", AH1_Liver_Ribozero_nodups_bed),
-                         data.frame(id="AH1_Liver", AH1_Liver_nodups_bed),
-                         data.frame(id="AH1_PC_Ribozero", AH1_PC_Ribozero_nodups_bed),
-                         data.frame(id="AH1_PC", AH1_PC_nodups_bed),
-                         data.frame(id="AH2_Liver_Ribozero", AH2_Liver_Ribozero_nodups_bed),
-                         data.frame(id="AH2_Liver", AH2_Liver_nodups_bed),
-                         data.frame(id="AH2_PC_Ribozero", AH2_PC_Ribozero_nodups_bed),
-                         data.frame(id="AH2_PC", AH2_PC_nodups_bed))
+#P_all_nodups_id <- rbind(data.frame(id="AH1_Liver_Ribozero", AH1_Liver_Ribozero_nodups_bed),
+#                         data.frame(id="AH1_Liver", AH1_Liver_nodups_bed),
+#                         data.frame(id="AH1_PC_Ribozero", AH1_PC_Ribozero_nodups_bed),
+#                         data.frame(id="AH1_PC", AH1_PC_nodups_bed),
+#                         data.frame(id="AH2_Liver_Ribozero", AH2_Liver_Ribozero_nodups_bed),
+#                         data.frame(id="AH2_Liver", AH2_Liver_nodups_bed),
+#                         data.frame(id="AH2_PC_Ribozero", AH2_PC_Ribozero_nodups_bed),
+#                         data.frame(id="AH2_PC", AH2_PC_nodups_bed))
 
-P_all_nodups <- data.frame(P_all_nodups_id[,-1])
-P_all_nodups <- P_all_nodups[!duplicated(P_all_nodups),]
-P_all_nodups[, c("V2")] <- sapply(P_all_nodups[, c("V2")], as.numeric)
-P_all_nodups <- P_all_nodups[with(P_all_nodups, order(V1,V2)),]
+#P_all_nodups <- data.frame(P_all_nodups_id[,-1])
+#P_all_nodups <- P_all_nodups[!duplicated(P_all_nodups),]
+#P_all_nodups[, c("V2")] <- sapply(P_all_nodups[, c("V2")], as.numeric)
+#P_all_nodups <- P_all_nodups[with(P_all_nodups, order(V1,V2)),]
 
-write.table(P_all_nodups, "P_all.bed", row.names = FALSE,
-            col.names = FALSE, quote = FALSE, sep = "\t")
+AH1_Liver_Ribozero_nodupsP <- data.frame(AH1_Liver_Ribozero_nodups_bed[,-1])
+AH1_Liver_Ribozero_nodupsP <- AH1_Liver_Ribozero_nodupsP[!duplicated(AH1_Liver_Ribozero_nodupsP),]
+AH1_Liver_Ribozero_nodupsP[, c("V2")] <- sapply(AH1_Liver_Ribozero_nodupsP[, c("V2")], as.numeric)
+AH1_Liver_Ribozero_nodupsP_1 <- AH1_Liver_Ribozero_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH1_Liver_Ribozero_nodupsP_1 <- AH1_Liver_Ribozero_nodupsP_1[with(AH1_Liver_Ribozero_nodupsP_1, order(V1,V2)),]
 
+AH1_Liver_nodupsP <- data.frame(AH1_Liver_nodups_bed[,-1])
+AH1_Liver_nodupsP <- AH1_Liver_nodupsP[!duplicated(AH1_Liver_nodupsP),]
+AH1_Liver_nodupsP[, c("V2")] <- sapply(AH1_Liver_nodupsP[, c("V2")], as.numeric)
+AH1_Liver_nodupsP_1 <- AH1_Liver_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH1_Liver_nodupsP_1 <- AH1_Liver_nodupsP_1[with(AH1_Liver_nodupsP_1, order(V1,V2)),]
+
+AH1_PC_Ribozero_nodupsP <- data.frame(AH1_PC_Ribozero_nodups_bed[,-1])
+AH1_PC_Ribozero_nodupsP <- AH1_PC_Ribozero_nodupsP[!duplicated(AH1_PC_Ribozero_nodupsP),]
+AH1_PC_Ribozero_nodupsP[, c("V2")] <- sapply(AH1_PC_Ribozero_nodupsP[, c("V2")], as.numeric)
+AH1_PC_Ribozero_nodupsP_1 <- AH1_PC_Ribozero_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH1_PC_Ribozero_nodupsP_1 <- AH1_PC_Ribozero_nodupsP_1[with(AH1_PC_Ribozero_nodupsP_1, order(V1,V2)),]
+
+AH1_PC_nodupsP <- data.frame(AH1_PC_nodups_bed[,-1])
+AH1_PC_nodupsP <- AH1_PC_nodupsP[!duplicated(AH1_PC_nodupsP),]
+AH1_PC_nodupsP[, c("V2")] <- sapply(AH1_PC_nodupsP[, c("V2")], as.numeric)
+AH1_PC_nodupsP_1 <- AH1_PC_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH1_PC_nodupsP_1 <- AH1_PC_nodupsP_1[with(AH1_PC_nodupsP_1, order(V1,V2)),]
+
+AH2_Liver_Ribozero_nodupsP <- data.frame(AH2_Liver_Ribozero_nodups_bed[,-1])
+AH2_Liver_Ribozero_nodupsP <- AH2_Liver_Ribozero_nodupsP[!duplicated(AH2_Liver_Ribozero_nodupsP),]
+AH2_Liver_Ribozero_nodupsP[, c("V2")] <- sapply(AH2_Liver_Ribozero_nodupsP[, c("V2")], as.numeric)
+AH2_Liver_Ribozero_nodupsP_1 <- AH2_Liver_Ribozero_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH2_Liver_Ribozero_nodupsP_1 <- AH2_Liver_Ribozero_nodupsP_1[with(AH2_Liver_Ribozero_nodupsP_1, order(V1,V2)),]
+
+AH2_Liver_nodupsP <- data.frame(AH2_Liver_nodups_bed[,-1])
+AH2_Liver_nodupsP <- AH2_Liver_nodupsP[!duplicated(AH2_Liver_nodupsP),]
+AH2_Liver_nodupsP[, c("V2")] <- sapply(AH2_Liver_nodupsP[, c("V2")], as.numeric)
+AH2_Liver_nodupsP_1 <- AH2_Liver_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH2_Liver_nodupsP_1 <- AH2_Liver_nodupsP_1[with(AH2_Liver_nodupsP_1, order(V1,V2)),]
+
+AH2_PC_Ribozero_nodupsP <- data.frame(AH2_PC_Ribozero_nodups_bed[,-1])
+AH2_PC_Ribozero_nodupsP <- AH2_PC_Ribozero_nodupsP[!duplicated(AH2_PC_Ribozero_nodupsP),]
+AH2_PC_Ribozero_nodupsP[, c("V2")] <- sapply(AH2_PC_Ribozero_nodupsP[, c("V2")], as.numeric)
+AH2_PC_Ribozero_nodupsP_1 <- AH2_PC_Ribozero_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH2_PC_Ribozero_nodupsP_1 <- AH2_PC_Ribozero_nodupsP_1[with(AH2_PC_Ribozero_nodupsP_1, order(V1,V2)),]
+
+AH2_PC_nodupsP <- data.frame(AH2_PC_nodups_bed[,-1])
+AH2_PC_nodupsP <- AH2_PC_nodupsP[!duplicated(AH2_PC_nodupsP),]
+AH2_PC_nodupsP[, c("V2")] <- sapply(AH2_PC_nodupsP[, c("V2")], as.numeric)
+AH2_PC_nodupsP_1 <- AH2_PC_nodupsP[ ,c("V1", "V2", "V3", "target", "sig", "V5", "V6", "V7")]
+AH2_PC_nodupsP_1 <- AH2_PC_nodupsP_1[with(AH2_PC_nodupsP_1, order(V1,V2)),]
+
+#write.table(P_all_nodups, "P_all.bed", row.names = FALSE,
+#           col.names = FALSE, quote = FALSE, sep = "\t")
+
+write.table(AH1_Liver_Ribozero_nodupsP_1, "AH1_Liver_Ribozero_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
+write.table(AH1_Liver_nodupsP_1, "AH1_Liver_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
+write.table(AH1_PC_Ribozero_nodupsP_1, "AH1_PC_Ribozero_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
+write.table(AH1_PC_nodupsP_1, "AH1_PC_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
+write.table(AH2_Liver_Ribozero_nodupsP_1, "AH2_Liver_Ribozero_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
+write.table(AH2_Liver_nodupsP_1, "AH2_Liver_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
+write.table(AH2_PC_Ribozero_nodupsP_1, "AH2_PC_Ribozero_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
+write.table(AH2_PC_nodupsP_1, "AH2_PC_nodupsP_1.bed", row.names = FALSE,
+            col.names = FALSE, quote=FALSE, sep="\t")
 
 #anti-join step with f12 and nodups; remove
 #Erica's script uses just the nodup, not nodup_bed. WHY? 
 #need to make V4 character in nodup file since it's a character in f12 file
 
 AH1_Liver_Ribozero_nodups$V4 = as.character(AH1_Liver_Ribozero_nodups$V4)
-AH1_Liver_Ribozero_bed <- anti_join(AH1_Liver_Ribozero_bed_f12, AH1_Liver_Ribozero_nodups, by="V4")
+AH1_Liver_Ribozero_f3_bed <- anti_join(AH1_Liver_Ribozero_bed_f12, AH1_Liver_Ribozero_nodups, by="V4")
 AH1_Liver_nodups$V4 = as.character(AH1_Liver_nodups$V4)
-AH1_Liver_bed <- anti_join(AH1_Liver_bed_f12, AH1_Liver_nodups, by="V4")
+AH1_Liver_f3_bed <- anti_join(AH1_Liver_bed_f12, AH1_Liver_nodups, by="V4")
 AH1_PC_Ribozero_nodups$V4 = as.character(AH1_PC_Ribozero_nodups$V4)
-AH1_PC_Ribozero_bed <- anti_join(AH1_PC_Ribozero_bed_f12, AH1_PC_Ribozero_nodups, by="V4")
+AH1_PC_Ribozero_f3_bed <- anti_join(AH1_PC_Ribozero_bed_f12, AH1_PC_Ribozero_nodups, by="V4")
 AH1_PC_nodups$V4 = as.character(AH1_PC_nodups$V4)
-AH1_PC_bed <- anti_join(AH1_PC_bed_f12, AH1_PC_nodups, by="V4")
+AH1_PC_f3_bed <- anti_join(AH1_PC_bed_f12, AH1_PC_nodups, by="V4")
 
 AH2_Liver_Ribozero_nodups$V4 = as.character(AH2_Liver_Ribozero_nodups$V4)
-AH2_Liver_Ribozero_bed <- anti_join(AH2_Liver_Ribozero_bed_f12, AH2_Liver_Ribozero_nodups, by="V4")
+AH2_Liver_Ribozero_f3_bed <- anti_join(AH2_Liver_Ribozero_bed_f12, AH2_Liver_Ribozero_nodups, by="V4")
 AH2_Liver_nodups$V4 = as.character(AH2_Liver_nodups$V4)
-AH2_Liver_bed <- anti_join(AH2_Liver_bed_f12, AH2_Liver_nodups, by="V4")
+AH2_Liver_f3_bed <- anti_join(AH2_Liver_bed_f12, AH2_Liver_nodups, by="V4")
 AH2_PC_Ribozero_nodups$V4 = as.character(AH2_PC_Ribozero_nodups$V4)
-AH2_PC_Ribozero_bed <- anti_join(AH2_PC_Ribozero_bed_f12, AH2_PC_Ribozero_nodups, by="V4")
+AH2_PC_Ribozero_f3_bed <- anti_join(AH2_PC_Ribozero_bed_f12, AH2_PC_Ribozero_nodups, by="V4")
 AH2_PC_nodups$V4 = as.character(AH2_PC_nodups$V4)
-AH2_PC_bed <- anti_join(AH2_PC_bed_f12, AH2_PC_nodups, by="V4")
+AH2_PC_f3_bed <- anti_join(AH2_PC_bed_f12, AH2_PC_nodups, by="V4")
  
 #make V2 column numeric
-AH1_Liver_Ribozero_bed[,c("V2")] <- sapply(AH1_Liver_Ribozero_bed[,c("V2")], as.numeric)
-AH1_Liver_bed[,c("V2")] <- sapply(AH1_Liver_bed[,c("V2")], as.numeric)
-AH1_PC_Ribozero_bed[,c("V2")] <- sapply(AH1_PC_Ribozero_bed[,c("V2")], as.numeric)
-AH1_PC_bed[,c("V2")] <- sapply(AH1_PC_bed[,c("V2")], as.numeric)
+AH1_Liver_Ribozero_f3_bed[,c("V2")] <- sapply(AH1_Liver_Ribozero_f3_bed[,c("V2")], as.numeric)
+AH1_Liver_f3_bed[,c("V2")] <- sapply(AH1_Liver_f3_bed[,c("V2")], as.numeric)
+AH1_PC_Ribozero_f3_bed[,c("V2")] <- sapply(AH1_PC_Ribozero_f3_bed[,c("V2")], as.numeric)
+AH1_PC_f3_bed[,c("V2")] <- sapply(AH1_PC_f3_bed[,c("V2")], as.numeric)
 
-AH2_Liver_Ribozero_bed[,c("V2")] <- sapply(AH2_Liver_Ribozero_bed[,c("V2")], as.numeric)
-AH2_Liver_bed[,c("V2")] <- sapply(AH2_Liver_bed[,c("V2")], as.numeric)
-AH2_PC_Ribozero_bed[,c("V2")] <- sapply(AH2_PC_Ribozero_bed[,c("V2")], as.numeric)
-AH2_PC_bed[,c("V2")] <- sapply(AH2_PC_bed[,c("V2")], as.numeric)
+AH2_Liver_Ribozero_f3_bed[,c("V2")] <- sapply(AH2_Liver_Ribozero_f3_bed[,c("V2")], as.numeric)
+AH2_Liver_f3_bed[,c("V2")] <- sapply(AH2_Liver_f3_bed[,c("V2")], as.numeric)
+AH2_PC_Ribozero_f3_bed[,c("V2")] <- sapply(AH2_PC_Ribozero_f3_bed[,c("V2")], as.numeric)
+AH2_PC_f3_bed[,c("V2")] <- sapply(AH2_PC_f3_bed[,c("V2")], as.numeric)
 
-write.table(AH1_Liver_Ribozero_bed, "AH1_Liver_Ribozero_f3.bed", row.names=FALSE, 
+#order the files
+AH1_Liver_Ribozero_f3_bed <- AH1_Liver_Ribozero_f3_bed[with(AH1_Liver_Ribozero_f3_bed, order(V1, V2)), ]
+AH1_Liver_f3_bed <- AH1_Liver_f3_bed[with(AH1_Liver_f3_bed, order(V1, V2)), ]
+AH1_PC_Ribozero_f3_bed <- AH1_PC_Ribozero_f3_bed[with(AH1_PC_Ribozero_f3_bed, order(V1, V2)), ]
+AH1_PC_f3_bed <- AH1_PC_f3_bed[with(AH1_PC_f3_bed, order(V1, V2)), ]
+
+AH2_Liver_Ribozero_f3_bed <- AH2_Liver_Ribozero_f3_bed[with(AH2_Liver_Ribozero_f3_bed, order(V1, V2)), ]
+AH2_Liver_f3_bed <- AH2_Liver_f3_bed[with(AH2_Liver_f3_bed, order(V1, V2)), ]
+AH2_PC_Ribozero_f3_bed <- AH2_PC_Ribozero_f3_bed[with(AH2_PC_Ribozero_f3_bed, order(V1, V2)), ]
+AH2_PC_f3_bed <- AH2_PC_f3_bed[with(AH2_PC_f3_bed, order(V1, V2)), ]
+
+
+write.table(AH1_Liver_Ribozero_f3_bed, "AH1_Liver_Ribozero_f3.bed", row.names=FALSE, 
             col.names=FALSE, quote=FALSE, sep="\t")
-write.table(AH1_Liver_bed, "AH1_Liver_f3.bed", row.names=FALSE, 
+write.table(AH1_Liver_f3_bed, "AH1_Liver_f3.bed", row.names=FALSE, 
             col.names=FALSE, quote=FALSE, sep="\t")
-write.table(AH1_PC_Ribozero_bed, "AH1_PC_Ribozero_f3.bed", row.names=FALSE,
+write.table(AH1_PC_Ribozero_f3_bed, "AH1_PC_Ribozero_f3.bed", row.names=FALSE,
             col.names=FALSE, quote=FALSE, sep="\t")
-write.table(AH1_PC_bed, "AH1_PC_f3.bed", row.names=FALSE,
+write.table(AH1_PC_f3_bed, "AH1_PC_f3.bed", row.names=FALSE,
             col.names=FALSE, quote=FALSE, sep="\t")
 
-write.table(AH2_Liver_Ribozero_bed, "AH2_Liver_Ribozero_f3.bed", row.names=FALSE,
+write.table(AH2_Liver_Ribozero_f3_bed, "AH2_Liver_Ribozero_f3.bed", row.names=FALSE,
             col.names=FALSE, quote=FALSE, sep="\t")
-write.table(AH2_Liver_bed, "AH2_Liver_f3.bed", row.names=FALSE,
+write.table(AH2_Liver_f3_bed, "AH2_Liver_f3.bed", row.names=FALSE,
             col.names=FALSE, quote=FALSE, sep="\t")
-write.table(AH2_PC_Ribozero_bed, "AH2_PC_Ribozero_f3.bed", row.names=FALSE,
+write.table(AH2_PC_Ribozero_f3_bed, "AH2_PC_Ribozero_f3.bed", row.names=FALSE,
             col.names=FALSE, quote=FALSE, sep="\t")
-write.table(AH2_PC_bed, "AH2_PC_f3.bed", row.names=FALSE,
+write.table(AH2_PC_f3_bed, "AH2_PC_f3.bed", row.names=FALSE,
             col.names=FALSE, quote=FALSE, sep="\t")
+
+# Can concatenate with labels to make it easier to make figures - may not be necessary?
+# Example:
+#lncRNA_all_AH1 <- rbind(data.frame(id="Liver_Ribozero", AH1_Liver_Ribozero_bed), 
+#                       data.frame(id="Liver_PolyA", AH1_Liver_bed),
+#                       data.frame(id="Parietal_Cortex_Ribozero", AH1_PC_Ribozero_bed)
+#                       data.frame(id="Parietal_Cortex_PolyA", AH1_PC_bed))
+
+#lncRNA_all_AH1 <- lncRNA_all_AH1[with(lncRNA_all_AH1, order(V2, V3)),]
+#write.table(lncRNA_all_AH1, "lncRNA_all_AH1", row.names=FALSE, col.names=FALSE, quote=FALSE, sep="\t")
 
