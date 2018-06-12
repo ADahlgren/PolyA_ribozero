@@ -1,0 +1,120 @@
+#must be done on server due to memory issue
+AH1_Liver_Ribozero_Pblastn <- read.table("AH1_Liver_Ribozero_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+AH1_Liver_Pblastn <- read.table("AH1_Liver_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+AH1_PC_Ribozero_Pblastn <- read.table("AH1_PC_Ribozero_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+AH1_PC_Pblastn <- read.table("AH1_PC_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+AH2_Liver_Ribozero_Pblastn <- read.table("AH2_Liver_Ribozero_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+AH2_Liver_Pblastn <- read.table("AH2_Liver_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+AH2_PC_Ribozero_Pblastn <- read.table("AH2_PC_Ribozero_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+AH2_PC_Pblastn <- read.table("AH2_PC_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
+
+names(AH1_Liver_Ribozero_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+names(AH1_Liver_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+names(AH1_PC_Ribozero_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+names(AH1_PC_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+names(AH2_Liver_Ribozero_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+names(AH2_Liver_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+names(AH2_PC_Ribozero_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+names(AH2_PC_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
+
+AH1_Liver_Ribozero_nodupsP_1 <- read.table("AH1_Liver_Ribozero_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+AH1_Liver_nodupsP_1 <- read.table("AH1_Liver_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+AH1_PC_Ribozero_nodupsP_1 <- read.table("AH1_PC_Ribozero_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+AH1_PC_nodupsP_1 <- read.table("AH1_PC_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+AH2_Liver_Ribozero_nodupsP_1 <- read.table("AH2_Liver_Ribozero_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+AH2_Liver_nodupsP_1 <- read.table("AH2_Liver_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+AH2_PC_Ribozero_nodupsP_1 <- read.table("AH2_PC_Ribozero_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+AH2_PC_nodupsP_1 <- read.table("AH2_PC_nodupsP_1.bed", header=F, stringsAsFactors = F, sep="\t")
+
+AH1_Liver_Ribozero_Pblastn_merge <- merge(AH1_Liver_Ribozero_Pblastn, AH1_Liver_Ribozero_nodupsP_1, by="V4")
+AH1_Liver_Pblastn_merge <- merge(AH1_Liver_Pblastn, AH1_Liver_nodupsP_1, by="V4")
+AH1_PC_Ribozero_Pblastn_merge <- merge(AH1_PC_Ribozero_Pblastn, AH1_PC_Ribozero_nodupsP_1, by="V4")
+AH1_PC_Pblastn_merge <- merge(AH1_PC_Pblastn, AH1_PC_nodupsP_1, by="V4")
+AH2_Liver_Ribozero_Pblastn_merge <- merge(AH2_Liver_Ribozero_Pblastn, AH2_Liver_Ribozero_nodupsP_1, by="V4")
+AH2_Liver_Pblastn_merge <- merge(AH2_Liver_Pblastn, AH2_Liver_nodupsP_1, by="V4")
+AH2_PC_Ribozero_Pblastn_merge <- merge(AH2_PC_Ribozero_Pblastn, AH2_PC_Ribozero_nodupsP_1, by="V4")
+AH2_PC_Pblastn_merge <- merge(AH2_PC_Pblastn, AH2_PC_nodupsP_1, by="V4")
+
+
+AH1_Liver_Ribozero_Pblastn_bed <- AH1_Liver_Ribozero_Pblastn_merge[ ,colnames(AH1_Liver_Ribozero_nodupsP_1)]
+AH1_Liver_Pblastn_bed <- AH1_Liver_Pblastn_merge[ ,colnames(AH1_Liver_nodupsP_1)]
+AH1_PC_Ribozero_Pblastn_bed <- AH1_PC_Ribozero_Pblastn_merge[ ,colnames(AH1_PC_Ribozero_nodupsP_1)]
+AH1_PC_Pblastn_bed <- AH1_PC_Pblastn_merge[ ,colnames(AH1_PC_nodupsP_1)]
+AH2_Liver_Ribozero_Pblastn_bed <- AH2_Liver_Ribozero_Pblastn_merge[ ,colnames(AH2_Liver_Ribozero_nodupsP_1)]
+AH2_Liver_Pblastn_bed <- AH2_Liver_Pblastn_merge[ ,colnames(AH2_Liver_nodupsP_1)]
+AH2_PC_Ribozero_Pblastn_bed <- AH2_PC_Ribozero_Pblastn_merge[ ,colnames(AH2_PC_Ribozero_nodupsP_1)]
+AH2_PC_Pblastn_bed <- AH2_PC_Pblastn_merge[ ,colnames(AH2_PC_nodupsP_1)]
+
+
+AH1_Liver_Ribozero_PlncRNA <- subset(AH1_Liver_Ribozero_Pblastn_merge, qcovs >20)
+AH1_Liver_PlncRNA <- subset(AH1_Liver_Pblastn_merge, qcovs >20)
+AH1_PC_Ribozero_PlncRNA <- subset(AH1_PC_Ribozero_Pblastn_merge, qcovs >20)
+AH1_PC_PlncRNA <- subset(AH1_PC_Pblastn_merge, qcovs >20)
+AH2_Liver_Ribozero_PlncRNA <- subset(AH2_Liver_Ribozero_Pblastn_merge, qcovs >20)
+AH2_Liver_PlncRNA <- subset(AH2_Liver_Pblastn_merge, qcovs >20)
+AH2_PC_Ribozero_PlncRNA <- subset(AH2_PC_Ribozero_Pblastn_merge, qcovs >20)
+AH2_PC_PlncRNA <- subset(AH2_PC_Pblastn_merge, qcovs >20)
+
+
+AH1_Liver_Ribozero_PlncRNA <- AH1_Liver_Ribozero_PlncRNA[ ,colnames(AH1_Liver_Ribozero_nodupsP_1)]
+AH1_Liver_PlncRNA <- AH1_Liver_PlncRNA[ ,colnames(AH1_Liver_nodupsP_1)]
+AH1_PC_Ribozero_PlncRNA <- AH1_PC_Ribozero_PlncRNA[ ,colnames(AH1_PC_Ribozero_nodupsP_1)]
+AH1_PC_PlncRNA <- AH1_PC_PlncRNA[ ,colnames(AH1_PC_nodupsP_1)]
+AH2_Liver_Ribozero_PlncRNA <- AH2_Liver_Ribozero_PlncRNA[ ,colnames(AH2_Liver_Ribozero_nodupsP_1)]
+AH2_Liver_PlncRNA <- AH2_Liver_PlncRNA[ ,colnames(AH2_Liver_nodupsP_1)]
+AH2_PC_Ribozero_PlncRNA <- AH2_PC_Ribozero_PlncRNA[ ,colnames(AH2_PC_Ribozero_nodupsP_1)]
+AH2_PC_PlncRNA <- AH2_PC_PlncRNA[ ,colnames(AH2_PC_nodupsP_1)]
+
+
+AH1_Liver_Ribozero_PlncRNA <- AH1_Liver_Ribozero_PlncRNA[!duplicated(AH1_Liver_Ribozero_PlncRNA), ]
+AH1_Liver_PlncRNA <- AH1_Liver_PlncRNA[!duplicated(AH1_Liver_PlncRNA), ]
+AH1_PC_Ribozero_PlncRNA <- AH1_PC_Ribozero_PlncRNA[!duplicated(AH1_PC_Ribozero_PlncRNA), ]
+AH1_PC_PlncRNA <- AH1_PC_PlncRNA[!duplicated(AH1_PC_PlncRNA), ]
+AH2_Liver_Ribozero_PlncRNA <- AH2_Liver_Ribozero_PlncRNA[!duplicated(AH2_Liver_Ribozero_PlncRNA), ]
+AH2_Liver_PlncRNA <- AH2_Liver_PlncRNA[!duplicated(AH2_Liver_PlncRNA), ]
+AH2_PC_Ribozero_PlncRNA <- AH2_PC_Ribozero_PlncRNA[!duplicated(AH2_PC_Ribozero_PlncRNA), ]
+AH2_PC_PlncRNA <- AH2_PC_PlncRNA[!duplicated(AH2_PC_PlncRNA), ]
+
+
+AH1_Liver_Ribozero_P_final_bed <- anti_join(AH1_Liver_Ribozero_nodupsP_1, AH1_Liver_Ribozero_PlncRNA, by="V4")
+AH1_Liver_P_final_bed <- anti_join(AH1_Liver_nodupsP_1, AH1_Liver_PlncRNA, by="V4")
+AH1_PC_Ribozero_P_final_bed <- anti_join(AH1_PC_Ribozero_nodupsP_1, AH1_PC_Ribozero_PlncRNA, by="V4")
+AH1_PC_P_final_bed <- anti_join(AH1_PC_nodupsP_1, AH1_PC_PlncRNA, by="V4")
+AH2_Liver_Ribozero_P_final_bed <- anti_join(AH2_Liver_Ribozero_nodupsP_1, AH2_Liver_Ribozero_PlncRNA, by="V4")
+AH2_Liver_P_final_bed <- anti_join(AH2_Liver_nodupsP_1, AH2_Liver_PlncRNA, by="V4")
+AH2_PC_Ribozero_P_final_bed <- anti_join(AH2_PC_Ribozero_nodupsP_1, AH2_PC_Ribozero_PlncRNA, by="V4")
+AH2_PC_P_final_bed <- anti_join(AH2_PC_nodupsP_1, AH2_PC_PlncRNA, by="V4")
+
+
+write.table(AH1_Liver_Ribozero_Pblastn_bed, "AH1_Liver_Ribozero_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_Liver_Ribozero_PlncRNA, "AH1_Liver_Ribozero_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_Liver_Ribozero_P_final_bed, "AH1_Liver_Ribozero_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
+write.table(AH1_Liver_Pblastn_bed, "AH1_Liver_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_Liver_PlncRNA, "AH1_Liver_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_Liver_P_final_bed, "AH1_Liver_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
+write.table(AH1_PC_Ribozero_Pblastn_bed, "AH1_PC_Ribozero_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_PC_Ribozero_PlncRNA, "AH1_PC_Ribozero_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_PC_Ribozero_P_final_bed, "AH1_PC_Ribozero_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
+write.table(AH1_PC_Pblastn_bed, "AH1_PC_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_PC_PlncRNA, "AH1_PC_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH1_PC_P_final_bed, "AH1_PC_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
+write.table(AH2_Liver_Ribozero_Pblastn_bed, "AH2_Liver_Ribozero_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_Liver_Ribozero_PlncRNA, "AH2_Liver_Ribozero_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_Liver_Ribozero_P_final_bed, "AH2_Liver_Ribozero_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
+write.table(AH2_Liver_Pblastn_bed, "AH2_Liver_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_Liver_PlncRNA, "AH2_Liver_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_Liver_P_final_bed, "AH2_Liver_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
+write.table(AH2_PC_Ribozero_Pblastn_bed, "AH2_PC_Ribozero_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_PC_Ribozero_PlncRNA, "AH2_PC_Ribozero_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_PC_Ribozero_P_final_bed, "AH2_PC_Ribozero_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
+write.table(AH2_PC_Pblastn_bed, "AH2_PC_Pblastn.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_PC_PlncRNA, "AH2_PC_PlncRNA.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table(AH2_PC_P_final_bed, "AH2_PC_P_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+
