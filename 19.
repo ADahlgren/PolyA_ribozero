@@ -1,0 +1,10 @@
+setwd("~/research/polyA_ribozero/Filtering")
+
+AH1_Liver_Ribozero_PlncRNA_bed <- read.table("AH1_Liver_Ribozero_PlncRNA.bed",  header=F, stringsAsFactors=F,sep = "\t")[-5] # has [-1] in Erica's code?
+names(AH1_Liver_Ribozero_PlncRNA_bed) = c("V1", "V2", "V3", "V4", "V5", "V6", "V7")
+AH1_Liver_Ribozero_f3_bed <- read.table("AH1_Liver_Ribozero_f3.bed", header=F)
+AH1_Liver_Ribozero_lncRNA_bed <- rbind(AH1_Liver_Ribozero_f3_bed, AH1_Liver_Ribozero_PlncRNA_bed)
+AH1_Liver_Ribozero_lncRNA_bed <- AH1_Liver_Ribozero_lncRNA_bed[!duplicated(AH1_Liver_Ribozero_lncRNA_bed),]
+AH1_Liver_Ribozero_lncRNA_bed <- AH1_Liver_Ribozero_lncRNA_bed[with(AH1_Liver_Ribozero_lncRNA_bed, order(V1, V2)), ]
+write.table(AH1_Liver_Ribozero_PlncRNA_bed, "lncRNA_rescued.bed", row.names=F, col.names=F, quote=F, sep = "\t")
+write.table( AH1_Liver_Ribozero_lncRNA_bed, "AH1_Liver_Ribozero_lncRNA_final.bed", row.names=F, col.names=F, quote=F, sep = "\t")
