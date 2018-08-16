@@ -1,4 +1,9 @@
 #must be done on server due to memory issue
+
+require(tidyr)
+require(dplyr)
+require(stringr)
+
 AH1_Liver_Ribozero_Pblastn <- read.table("AH1_Liver_Ribozero_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
 AH1_Liver_Pblastn <- read.table("AH1_Liver_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
 AH1_PC_Ribozero_Pblastn <- read.table("AH1_PC_Ribozero_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
