@@ -8,6 +8,15 @@ AH2_Liver_Pblastn <- read.table("AH2_Liver_human_lncrna_fix.outfmt6", header=F, 
 AH2_PC_Ribozero_Pblastn <- read.table("AH2_PC_Ribozero_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
 AH2_PC_Pblastn <- read.table("AH2_PC_human_lncrna_fix.outfmt6", header=F, stringsAsFactors=F,sep = "\t")
 
+AH1_Liver_Ribozero_Pblastn <- AH1_Liver_Ribozero_Pblastn[!duplicated(AH1_Liver_Ribozero_Pblastn),]
+AH1_Liver_Pblastn <- AH1_Liver_Pblastn[!duplicated(AH1_Liver_Pblastn),]
+AH1_PC_Ribozero_Pblastn <- AH1_PC_Ribozero_Pblastn[!duplicated(AH1_PC_Ribozero_Pblastn),]
+AH1_PC_Pblastn <- AH1_PC_Pblastn[!duplicated(AH1_PC_Pblastn),]
+AH2_Liver_Ribozero_Pblastn <- AH2_Liver_Ribozero_Pblastn[!duplicated(AH2_Liver_Ribozero_Pblastn),]
+AH2_Liver_Pblastn <- AH2_Liver_Pblastn[!duplicated(AH2_Liver_Pblastn),]
+AH2_PC_Ribozero_Pblastn <- AH2_PC_Ribozero_Pblastn[!duplicated(AH2_PC_Ribozero_Pblastn),]
+AH2_PC_Pblastn <- AH2_PC_Pblastn[!duplicated(AH2_PC_Pblastn),]
+
 names(AH1_Liver_Ribozero_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
 names(AH1_Liver_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
 names(AH1_PC_Ribozero_Pblastn) = c("V4", "sseqid", "pident", "qcovs", "evalue")
