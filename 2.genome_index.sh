@@ -4,8 +4,6 @@ mkdir star_index
 
 #link reference files to index folder
 cd star_index
-ln -fs /share/finnolab/adahl/equCab2_UCSC_BWAIndex/*
-cd ..
 
 #GTF file was downloaded from horse_trans github
 
